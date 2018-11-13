@@ -1,18 +1,34 @@
 package be.ucll.ewiuo.Model;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import java.math.BigDecimal;
 import java.util.UUID;
 
+@Entity
 public class Sandwich {
+
+    @Id
+    @GeneratedValue(strategy= GenerationType.AUTO)
+    private UUID id;
+
     private String name;
     private String ingredients;
     private BigDecimal price;
+
+    public Sandwich(){};
 
     public Sandwich(String name, String ingredients, BigDecimal price) {
         this.name = name;
         this.ingredients = ingredients;
         this.price = price;
     }
+
+    public void setId(UUID id) { this.id = id; }
+
+    public UUID getId() { return id; }
 
     public String getName() {
         return name;

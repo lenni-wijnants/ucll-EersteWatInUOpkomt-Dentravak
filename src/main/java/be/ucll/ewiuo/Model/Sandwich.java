@@ -18,7 +18,7 @@ public class Sandwich {
     private String ingredients;
     private BigDecimal price;
 
-    public Sandwich(){};
+    public Sandwich(){}
 
     public Sandwich(String name, String ingredients, BigDecimal price) {
         this.name = name;
@@ -54,6 +54,7 @@ public class Sandwich {
     }
 
     public static class SandwichBuilder {
+        private UUID id;
         private String name;
         private String ingredients;
         private BigDecimal price;
@@ -68,7 +69,12 @@ public class Sandwich {
             return this;
         }
 
-        public SandwichBuilder WithIngedients(String ingredients){
+        public SandwichBuilder WithID(UUID id){
+            this.id = id;
+            return this;
+        }
+
+        public SandwichBuilder WithIngredients(String ingredients){
             this.ingredients = ingredients;
             return this;
         }

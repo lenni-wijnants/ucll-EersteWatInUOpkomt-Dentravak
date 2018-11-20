@@ -21,16 +21,16 @@ public class Application {
         return (args) -> {
 
             repository.save(Sandwich.SandwichBuilder.aSandwich()
-                    .WithName("smos")
-                    .WithIngedients("kaas, hesp")
-                    .WithPrice(new BigDecimal(2.30))
+                    .WithName("Smoske")
+                    .WithIngredients("Kaas en Hesp")
+                    .WithPrice(new BigDecimal(3.50))
                     .build());
             repository.save(Sandwich.SandwichBuilder.aSandwich()
-                    .WithName("boulet")
-                    .WithIngedients("boulet, andalouse, sla, ei, augurk")
-                    .WithPrice(new BigDecimal(2.45)).build());
+                    .WithName("Gezond")
+                    .WithIngredients("Groentjes")
+                    .WithPrice(new BigDecimal(4.00)).build());
             repository.save(Sandwich.SandwichBuilder.aSandwich()
-                    .WithName("americain").WithIngedients("americain, augurk")
+                    .WithName("americain").WithIngredients("americain, augurk")
                     .WithPrice(new BigDecimal(2.20))
                     .build());
 

@@ -19,20 +19,12 @@ public class Application {
     @Bean
     public CommandLineRunner demo(SandwichRepository repository) {
         return (args) -> {
-
-            repository.save(Sandwich.SandwichBuilder.aSandwich()
-                    .WithName("Smoske")
-                    .WithIngredients("Kaas en Hesp")
-                    .WithPrice(new BigDecimal(3.50))
-                    .build());
-            repository.save(Sandwich.SandwichBuilder.aSandwich()
-                    .WithName("Gezond")
-                    .WithIngredients("Groentjes")
-                    .WithPrice(new BigDecimal(4.00)).build());
-            repository.save(Sandwich.SandwichBuilder.aSandwich()
-                    .WithName("americain").WithIngredients("americain, augurk")
-                    .WithPrice(new BigDecimal(2.20))
-                    .build());
+            Sandwich s1 = new Sandwich("Smoske", "Kaas en Hesp", new BigDecimal(3.50));
+            Sandwich s2 = new Sandwich("Gezond", "Groentjes", new BigDecimal(4.00));
+            Sandwich s3 = new Sandwich("Americain", "Americain en Augurkjes", new BigDecimal(2.20));
+            repository.save(s1);
+            repository.save(s2);
+            repository.save(s3);
 
             /*
             // fetch all customers

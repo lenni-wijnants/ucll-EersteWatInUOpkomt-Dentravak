@@ -1,6 +1,6 @@
-package be.ucll.da.dentravak.model;
+package model;
 
-import be.ucll.da.dentravak.model.Sandwich;
+import be.ucll.ewiuo.Model.Sandwich;
 
 import java.math.BigDecimal;
 

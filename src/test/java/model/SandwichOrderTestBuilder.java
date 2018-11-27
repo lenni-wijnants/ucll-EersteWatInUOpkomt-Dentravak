@@ -1,4 +1,7 @@
-package be.ucll.da.dentravak.model;
+package model;
+
+import be.ucll.ewiuo.Model.LunchOrder;
+import be.ucll.ewiuo.Model.Sandwich;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -8,7 +11,7 @@ public class SandwichOrderTestBuilder {
 
     private UUID sandwichId;
     private String name;
-    private SandwichOrder.BreadType breadType;
+    private String breadType;
     private LocalDateTime creationDate;
     private BigDecimal price;
     private String mobilePhoneNumber;
@@ -37,7 +40,7 @@ public class SandwichOrderTestBuilder {
         return this;
     }
 
-    public SandwichOrderTestBuilder withBreadType(SandwichOrder.BreadType breadType) {
+    public SandwichOrderTestBuilder withBreadType(String breadType) {
         this.breadType = breadType;
         return this;
     }
@@ -57,8 +60,8 @@ public class SandwichOrderTestBuilder {
         return this;
     }
 
-    public SandwichOrder build() {
-        SandwichOrder sandwichOrder = new SandwichOrder();
+    public LunchOrder build() {
+        LunchOrder sandwichOrder = new LunchOrder();
         sandwichOrder.setSandwichId(sandwichId);
         sandwichOrder.setName(name);
         sandwichOrder.setBreadType(breadType);

@@ -1,6 +1,6 @@
-package be.ucll.ewiuo.Controller;
+package be.ucll.ewiuo.controller;
 
-import be.ucll.ewiuo.Model.Sandwich;
+import be.ucll.ewiuo.model.Sandwich;
 import be.ucll.ewiuo.repository.SandwichRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

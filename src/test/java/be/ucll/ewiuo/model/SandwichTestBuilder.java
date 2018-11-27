@@ -1,6 +1,4 @@
-package model;
-
-import be.ucll.ewiuo.Model.Sandwich;
+package be.ucll.ewiuo.model;
 
 import java.math.BigDecimal;
 

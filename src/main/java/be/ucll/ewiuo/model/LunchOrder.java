@@ -1,4 +1,4 @@
-package be.ucll.ewiuo.Model;
+package be.ucll.ewiuo.model;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

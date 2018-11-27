@@ -1,4 +1,4 @@
-package be.ucll.ewiuo.Model;
+package be.ucll.ewiuo.model;
 
 public class Greeting {
 

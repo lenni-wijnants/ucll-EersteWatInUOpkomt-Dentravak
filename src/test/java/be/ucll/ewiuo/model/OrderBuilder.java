@@ -1,7 +1,4 @@
-package model;
-
-import be.ucll.ewiuo.Model.LunchOrder;
-import be.ucll.ewiuo.Model.Sandwich;
+package be.ucll.ewiuo.model;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;

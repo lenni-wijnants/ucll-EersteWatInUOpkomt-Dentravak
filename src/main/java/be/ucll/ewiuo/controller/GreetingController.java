@@ -1,8 +1,8 @@
-package be.ucll.ewiuo.Controller;
+package be.ucll.ewiuo.controller;
 
 import java.util.concurrent.atomic.AtomicLong;
 
-import be.ucll.ewiuo.Model.Greeting;
+import be.ucll.ewiuo.model.Greeting;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;

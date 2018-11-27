@@ -1,7 +1,7 @@
-package controllers;
+package be.ucll.ewiuo.controllers;
 
 import be.ucll.ewiuo.Application;
-import be.ucll.ewiuo.Model.Sandwich;
+import be.ucll.ewiuo.model.Sandwich;
 import be.ucll.ewiuo.repository.SandwichRepository;
 import org.json.JSONException;
 import org.junit.Before;
@@ -11,12 +11,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import static model.SandwichTestBuilder.aSandwich;
+import static be.ucll.ewiuo.model.SandwichTestBuilder.aSandwich;
 import static net.javacrumbs.jsonunit.assertj.JsonAssertions.assertThatJson;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = Application.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-public class SandwichControllerIntegrationTest extends be.ucll.da.dentravak.controllers.AbstractControllerIntegrationTest {
+public class SandwichControllerIntegrationTest extends be.ucll.ewiuo.controllers.AbstractControllerIntegrationTest {
 
     @Autowired
     private SandwichRepository sandwichRepository;

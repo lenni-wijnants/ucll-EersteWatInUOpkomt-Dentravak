@@ -1,6 +1,6 @@
 package be.ucll.ewiuo.repository;
 
-import be.ucll.ewiuo.Model.LunchOrder;
+import be.ucll.ewiuo.model.LunchOrder;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;

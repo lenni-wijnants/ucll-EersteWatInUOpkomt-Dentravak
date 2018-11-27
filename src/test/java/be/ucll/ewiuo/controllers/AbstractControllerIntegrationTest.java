@@ -1,6 +1,6 @@
-package be.ucll.da.dentravak.controllers;
+package be.ucll.ewiuo.controllers;
 
-import be.ucll.da.dentravak.Application;
+import be.ucll.ewiuo.Application;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.runner.RunWith;

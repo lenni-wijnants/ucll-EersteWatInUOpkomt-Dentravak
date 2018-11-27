@@ -1,6 +1,6 @@
 package be.ucll.ewiuo;
 
-import be.ucll.ewiuo.Model.Sandwich;
+import be.ucll.ewiuo.model.Sandwich;
 import be.ucll.ewiuo.repository.SandwichRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;

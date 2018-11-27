@@ -21,16 +21,12 @@ class DenTravakSandwichesList extends DenTravakAbstractElement {
 
     get template() {
         return `
-            <style>
-                div.dt-sandwich-info {
-                    margin-left: auto;
-                }
             </style>
-            <div class="animate">
+            <div>
                 <h3>Welkom bij den Travak</h3>
                 <h4>Kies je broodje</h4>
                 <div>
-                <ul id="sandwiches" class="list-group">
+                <ul id="sandwiches">
                     </ul>
                 </div>
             </div>
@@ -39,16 +35,16 @@ class DenTravakSandwichesList extends DenTravakAbstractElement {
 
     getSandwichTemplate(sandwich) {
         return `
-            <a class="list-group-item">
-                <button type="button" class="btn btn-primary bmd-btn-fab">
+            <a>
+                <button type="button">
                     ${sandwich.name.charAt(0)}
                 </button>
-                <div class="bmd-list-group-col">
-                    <p class="list-group-item-heading">${sandwich.name}</p>
-                    <p class="list-group-item-text">${sandwich.ingredients}</p>
+                <div>
+                    <p>${sandwich.name}</p>
+                    <p>${sandwich.ingredients}</p>
                 </div>
-                <div class="dt-sandwich-info">
-                    <p class="list-group-item-text">${sandwich.price}</p>
+                <div>
+                    <p>${sandwich.price}</p>
                 </div>
             </a>
         `;

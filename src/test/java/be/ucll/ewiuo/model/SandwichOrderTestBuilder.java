@@ -12,6 +12,7 @@ public class SandwichOrderTestBuilder {
     private LocalDateTime creationDate;
     private BigDecimal price;
     private String mobilePhoneNumber;
+    private String test;
 
     private SandwichOrderTestBuilder() {
     }

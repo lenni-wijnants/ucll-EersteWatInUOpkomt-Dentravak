@@ -47,6 +47,7 @@ public class SandwichOrderControllerIntegrationTest extends be.ucll.ewiuo.contro
     public void testPostSandwichOrder() throws JSONException {
         LunchOrder sandwichOrder = anOrder().forSandwich(savedSandwich).withBreadType("BOTERHAMMEKES").withMobilePhoneNumber("0487/123456").build();
         String actualSandwiches = httpPost("/orders", sandwichOrder);
+        System.out.println(actualSandwiches);
         String expectedSandwiches = "{\"id\":\"${json-unit.ignore}\",\"sandwichId\":\"" + savedSandwich.getId() + "\",\"name\":\"Americain\",\"breadType\":\"BOTERHAMMEKES\",\"creationDate\":\"${json-unit.ignore}\",\"price\":3.5,\"mobilePhoneNumber\":\"0487/123456\"}";
 
         assertThatJson(actualSandwiches).isEqualTo(expectedSandwiches);

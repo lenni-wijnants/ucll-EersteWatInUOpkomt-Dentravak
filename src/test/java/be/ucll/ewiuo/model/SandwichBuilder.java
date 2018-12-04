@@ -35,7 +35,12 @@ public class SandwichBuilder {
     }
 
     public Sandwich build(){
-        return new Sandwich(name, ingredients, price);
+        Sandwich sandwich = new Sandwich();
+        sandwich.setName(name);
+        sandwich.setIngredients(ingredients);
+        sandwich.setPrice(price);
+        return sandwich;
+        //return new Sandwich(name, ingredients, price);
         //throw new RuntimeException();
     }
 }

@@ -11,8 +11,7 @@ import java.time.LocalDateTime;
 @RestController
 public class OrderController {
 
-    @Autowired
-    OrderRepository repository;
+    @Autowired OrderRepository repository;
 
     @RequestMapping(value = "/orders", method = RequestMethod.GET)
     public Iterable<LunchOrder> orders() {

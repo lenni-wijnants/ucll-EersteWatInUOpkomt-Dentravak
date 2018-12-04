@@ -59,6 +59,14 @@ public class OrderBuilder {
     }
 
     public LunchOrder build(){
-        return new LunchOrder(this.sandwichId, this.name, this.breadType, this.price, this.mobilePhoneNumber);
+        LunchOrder sandwichOrder = new LunchOrder();
+        sandwichOrder.setSandwichId(sandwichId);
+        sandwichOrder.setName(name);
+        sandwichOrder.setBreadType(breadType);
+        sandwichOrder.setCreationDate(creationDate);
+        sandwichOrder.setMobilePhoneNumber(mobilePhoneNumber);
+        sandwichOrder.setPrice(price);
+        return sandwichOrder;
+        //return new LunchOrder(this.sandwichId, this.name, this.breadType, this.price, this.mobilePhoneNumber);
     }
 }

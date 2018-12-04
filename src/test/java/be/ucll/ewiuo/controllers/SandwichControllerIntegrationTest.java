@@ -48,7 +48,15 @@ public class SandwichControllerIntegrationTest extends be.ucll.ewiuo.controllers
 
     @Test
     public void testPutSandwich() throws JSONException {
-        throw new RuntimeException("Implement this test and then the production code");
+        Sandwich sandwich = aSandwich().withName("Visburger").withIngredients("Vis").withPrice(3.5).build();
+
+        String actualSandwichAsJson = httpPut("/sandwiches", sandwich);
+        String expectedSandwichAsJson = "{\"id\":\"${json-unit.ignore}\",\"name\":\"Visburger\",\"ingredients\":\"Vis\",\"price\":3.5}";
+
+        assertThatJson(actualSandwichAsJson).isEqualTo(expectedSandwichAsJson);
+
+        String actualSanwichesSecondGo = httpPut("/sandwiches", sandwich);
+        assertThatJson(actualSandwichAsJson).isEqualTo(actualSanwichesSecondGo);
     }
 
     @Test
@@ -61,7 +69,7 @@ public class SandwichControllerIntegrationTest extends be.ucll.ewiuo.controllers
         httpPost("/sandwiches", s2);
         httpPost("/sandwiches", s3);
         String sandwiches = httpGet("/sandwiches");
-        String expectedSandwiches = "[{\"id\":\"c561dd56-0641-475a-9092-e33ab3afba4e\",\"name\":\"Smoske\",\"ingredients\":\"Kaas en Hesp\",\"price\":3.50},{\"id\":\"990c64cf-8aa4-4aab-af3c-9294e07c387b\",\"name\":\"Gezond\",\"ingredients\":\"Groentjes\",\"price\":4.00},{\"id\":\"e68ca8b0-8108-473b-8b44-a29d4f4b1a09\",\"name\":\"Americain\",\"ingredients\":\"Americain en Augurkjes\",\"price\":2.20}]";
+        String expectedSandwiches = "[{\"id\":\"${json-unit.ignore}\",\"name\":\"Smoske\",\"ingredients\":\"Kaas en Hesp\",\"price\":3.50},{\"id\":\"${json-unit.ignore}\",\"name\":\"Gezond\",\"ingredients\":\"Groentjes\",\"price\":4.00},{\"id\":\"${json-unit.ignore}\",\"name\":\"Americain\",\"ingredients\":\"Americain en Augurkjes\",\"price\":2.20}]";
 
         assertThatJson(sandwiches).isEqualTo(expectedSandwiches);
     }

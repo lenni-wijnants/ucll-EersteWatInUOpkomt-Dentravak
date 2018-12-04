@@ -32,7 +32,16 @@ dependencies {
     testCompile group: 'net.javacrumbs.json-unit', name: 'json-unit', version: '2.1.0'
     testCompile group: 'net.javacrumbs.json-unit', name: 'json-unit-assertj', version: '2.1.0'
     testCompile('org.springframework.boot:spring-boot-starter-test')
+    compile('mysql:mysql-connector-java:8.0.13')
 
+
+}
+
+jib {
+    to {
+        image = "den-travak-app:0.0.1-SNAPSHOT"
+    }
+    allowInsecureRegistries = true
 }
 
 group 'be.ucll.ewiuo'

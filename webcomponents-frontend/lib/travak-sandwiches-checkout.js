@@ -39,8 +39,8 @@ class DenTravakSandwichesCheckout extends DenTravakAbstractElement {
                     margin-left: auto;
                 }
             </style>
-            <div class="animate">
-                <div class="dt-header">
+            <div>
+                <div>
                     <h3>Welkom bij den Travak</h3>
                     <button id="back-button" type="button" class="btn btn-primary">Terug</button>
                 </div>
@@ -48,49 +48,49 @@ class DenTravakSandwichesCheckout extends DenTravakAbstractElement {
                 <div>
                 <ul id="sandwiches" class="list-group"></ul>
                 </div>
-                <div class="form-group">
+                <div>
                     <label for="typeBrood"><h4>Kies het type brood</h4></label>
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="typeBrood" id="radioBoterhammekes" value="option1">
-                        <label class="form-check-label" for="radioBoterhammekes">
+                    <div>
+                        <input type="radio" name="typeBrood" id="radioBoterhammekes" value="option1">
+                        <label for="radioBoterhammekes">
                             Boterhammekes
                         </label>
                     </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="typeBrood" id="radioWrap" value="option2">
-                        <label class="form-check-label" for="radioWrap">
+                    <div>
+                        <input type="radio" name="typeBrood" id="radioWrap" value="option2">
+                        <label for="radioWrap">
                             Wrap
                         </label>
                     </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="typeBrood" id="radioTurksBrood" value="option3">
-                        <label class="form-check-label" for="radioTurksBrood">
+                    <div>
+                        <input type="radio" name="typeBrood" id="radioTurksBrood" value="option3">
+                        <label for="radioTurksBrood">
                             Turks brood
                         </label>
                     </div>
                 </div>
-                <div class="form-group">
+                <div>
                     <label for="mobile-phone-number"><h4>Je GSM Nummer</h4></label>
-                    <input type="text" class="form-control" id="mobile-phone-number" placeholder="0487/12 34 56">
+                    <input type="text" id="mobile-phone-number" placeholder="0487/12 34 56">
                 </div>
 
-                <button id="order-button" class="btn btn-primary active">Bestellen</button>
+                <button id="order-button">Bestellen</button>
             </div>
         `;
     }
 
     getSandwichTemplate(sandwich) {
         return `
-            <a class="list-group-item">
-                <button type="button" class="btn btn-primary bmd-btn-fab">
+            <a>
+                <button type="button">
                     ${sandwich.name.charAt(0)}
                 </button>
-                <div class="bmd-list-group-col">
-                    <p class="list-group-item-heading">${sandwich.name}</p>
-                    <p class="list-group-item-text">${sandwich.ingredients}</p>
+                <div>
+                    <p>${sandwich.name}</p>
+                    <p>${sandwich.ingredients}</p>
                 </div>
                 <div class="dt-sandwich-info">
-                    <p class="list-group-item-text">${sandwich.price}</p>
+                    <p>${sandwich.price}</p>
                 </div>
             </a>
         `;

@@ -1,4 +1,4 @@
-import DenTravakAbstractElement from './travak-abstract-element.js';
+import DenTravakAbstractElement from '../travak-abstract-element.js';
 
 class DenTravakSandwichesList extends DenTravakAbstractElement {
 
@@ -21,13 +21,17 @@ class DenTravakSandwichesList extends DenTravakAbstractElement {
 
     get template() {
         return `
+            <style>
+                div.dt-sandwich-info {
+                    margin-left: auto;
+                }
             </style>
-            <div>
+            <div class="animate">
                 <h3>Welkom bij den Travak</h3>
                 <h4>Kies je broodje</h4>
                 <div>
-                <ul id="sandwiches">
-                    </ul>
+                <ul id="sandwiches" class="list-group">
+                </ul>
                 </div>
             </div>
         `;
@@ -35,16 +39,16 @@ class DenTravakSandwichesList extends DenTravakAbstractElement {
 
     getSandwichTemplate(sandwich) {
         return `
-            <a>
-                <button type="button">
+            <a class="list-group-item">
+                <button type="button" class="btn btn-primary bmd-btn-fab">
                     ${sandwich.name.charAt(0)}
                 </button>
-                <div>
-                    <p>${sandwich.name}</p>
-                    <p>${sandwich.ingredients}</p>
+                <div class="bmd-list-group-col">
+                    <p class="list-group-item-heading">${sandwich.name}</p>
+                    <p class="list-group-item-text">${sandwich.ingredients}</p>
                 </div>
-                <div>
-                    <p>${sandwich.price}</p>
+                <div class="dt-sandwich-info">
+                    <p class="list-group-item-text">${sandwich.price}</p>
                 </div>
             </a>
         `;

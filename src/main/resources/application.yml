@@ -1,3 +1,15 @@
+
+spring:
+  application:
+    name: dentravak
+  cloud:
+    consul:
+      discovery:
+        instanceId: ${spring.application.name}:${random.value}
+        healthCheckPath: /health-check
+healthCheckInterval: 20s
+
+---
 spring:
   jackson:
     serialization:

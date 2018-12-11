@@ -58,7 +58,7 @@ public class SandwichOrderControllerIntegrationTest extends be.ucll.ewiuo.contro
         LunchOrder sandwichOrder = anOrder().forSandwich(savedSandwich).withBreadType("BOTERHAMMEKES").withMobilePhoneNumber("0487/123456").build();
         httpPost("/orders", sandwichOrder);
         LunchOrder sandwichOrder2 = anOrder().forSandwich(savedSandwich).withBreadType("BOTERHAMMEKES").withMobilePhoneNumber("0493/123999").build();
-        httpPost("/orders", sandwichOrder);
+        httpPost("/orders", sandwichOrder2);
         String actualOrders = httpGet("/orders");
         String expectedOrders = "[{\"id\":\"${json-unit.ignore}\",\"sandwichId\":\"" + savedSandwich.getId() + "\",\"name\":\"Americain\",\"breadType\":\"BOTERHAMMEKES\",\"creationDate\":\"${json-unit.ignore}\",\"price\":3.5,\"mobilePhoneNumber\":\"0487/123456\"}," +
                 "{\"id\":\"${json-unit.ignore}\",\"sandwichId\":\"" + savedSandwich.getId() + "\",\"name\":\"Americain\",\"breadType\":\"BOTERHAMMEKES\",\"creationDate\":\"${json-unit.ignore}\",\"price\":3.5,\"mobilePhoneNumber\":\"0493/123999\"}]";

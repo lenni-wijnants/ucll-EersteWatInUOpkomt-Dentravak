@@ -28,15 +28,15 @@ public class SandwichListController {
     }
 
     @RequestMapping(value = "/sandwiches/{id}", method = RequestMethod.PUT)
-    public Sandwich updateSandwich(@PathVariable UUID id, @RequestBody Sandwich newsandwich){
+    public Sandwich updateSandwich(@PathVariable UUID id, @RequestBody Sandwich newSandwich){
         return repository.findById(id).map(sandwich -> {
-            sandwich.setName(newsandwich.getName());
-            sandwich.setIngredients(newsandwich.getIngredients());
-            sandwich.setPrice(newsandwich.getPrice());
+            sandwich.setName(newSandwich.getName());
+            sandwich.setIngredients(newSandwich.getIngredients());
+            sandwich.setPrice(newSandwich.getPrice());
             return repository.save(sandwich);
         }).orElseGet(() -> {
-            newsandwich.setId(id);
-            return repository.save(newsandwich);
+            newSandwich.setId(id);
+            return repository.save(newSandwich);
         });
     }
 }

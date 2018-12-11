@@ -1,5 +1,14 @@
 spring:
+  jackson:
+    serialization:
+      write_dates_as_timestamps: false
+
+---
+spring:
   profiles: container
+  jackson:
+    serialization:
+      write_dates_as_timestamps: false
   datasource:
     url: jdbc:mysql://${DATABASE_HOST}:${DATABASE_PORT}/${DATABASE_NAME}?autoReconnect=true&failOverReadOnly=false&maxReconnects=10&allowPublicKeyRetrieval=true&useSSL=false
     username: ${DATABASE_USER}

@@ -1,5 +1,8 @@
 package be.ucll.ewiuo.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -10,6 +13,8 @@ import java.util.UUID;
 
 @Entity
 public class LunchOrder {
+
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
@@ -17,11 +22,11 @@ public class LunchOrder {
     private UUID sandwichId;
     private String name;
     private String breadType;
-    private LocalDateTime creationDate;
+    private String creationDate;
     private BigDecimal price;
     private String mobilePhoneNumber;
 
-    public LunchOrder(){this.creationDate = LocalDateTime.now();}
+    public LunchOrder(){this.creationDate = LocalDateTime.now().toString();}
 
     public LunchOrder(UUID sandwichId, String name, String breadType, BigDecimal price, String mobilePhoneNumber)
     {
@@ -50,13 +55,13 @@ public class LunchOrder {
         this.breadType = breadType;
     }
 
-    public LocalDateTime getCreationDate() {return creationDate;}
+    public String getCreationDate() {return creationDate;}
 
     public void setCreationDate(LocalDateTime creationDate) {
         if (creationDate == null) {
-            this.creationDate = LocalDateTime.now();
+            this.creationDate = LocalDateTime.now().toString();
         } else {
-            this.creationDate = creationDate;
+            this.creationDate = creationDate.toString();
         }
     }
 

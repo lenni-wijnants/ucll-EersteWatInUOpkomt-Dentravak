@@ -26,7 +26,6 @@ class DenTravakSandwichesCheckout extends DenTravakAbstractElement {
         order.price = this.sandwich.price;
         console.log(order.name + order.sandwichId);
         //order.phoneNumber = '012345677';
-        console.log(this.byCss('input[name="typeBrood"]:checked').value);
         order.breadType = this.byCss('input[name="typeBrood"]:checked').value;
         order.mobilePhoneNumber = this.byCss('input[id="mobile-phone-number"]').value;
 

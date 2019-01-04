@@ -34,9 +34,31 @@ public class SandwichController {
             //TODO: sort allSandwiches by float in preferences
             Iterable<Sandwich> allSandwiches = repository.findAll();
             List<Sandwich> sandwiches = (List<Sandwich>) allSandwiches;
-            sandwiches.sort((Sandwich s1, Sandwich s2) -> preferences.getRatingForSandwich(s2.getId()).compareTo(preferences.getRatingForSandwich(s1.getId())));
+            List<Sandwich> sortedSandwiches = new ArrayList<>(sandwiches.size());
+            float max = preferences.getRatingForSandwich(sandwiches.get(0).getId());
+            int m = 0;
+            int z = 0;
 
-            return sandwiches;
+            for(int i = 0; i < sandwiches.size(); i++)
+            {
+                if(preferences.getRatingForSandwich(sandwiches.get(i).getId()) > max){
+                    max = preferences.getRatingForSandwich(sandwiches.get(i).getId());
+                }
+            }
+
+            do{
+                for (int i = m; i < sandwiches.size(); i++) {
+                    if (preferences.getRatingForSandwich(sandwiches.get(i).getId()) > max){
+                        max = preferences.getRatingForSandwich(sandwiches.get(i).getId());
+                        z = i;
+                    }
+                }
+                sortedSandwiches.set(m, sandwiches.get(z));
+                m++;
+
+            } while(m < sandwiches.size());
+
+            return sortedSandwiches;
         } catch (ServiceUnavailableException e) {
             return repository.findAll();
         }

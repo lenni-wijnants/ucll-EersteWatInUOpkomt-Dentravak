@@ -17,11 +17,11 @@ class DenTravakSandwichesOrderConfirmation extends DenTravakAbstractElement {
             .forEach(scoreBtn => scoreBtn.addEventListener('click', e => {
 
                 let recommendedItem = {};
-                recommendedItem.emailAddress = this.order.phoneNumber;
+                recommendedItem.emailAddress = this.order.mobilePhoneNumber;
                 recommendedItem.ratedItem = this.order.sandwichId;
                 recommendedItem.rating = scoreBtn.dataset.score;
 
-                fetch('193.191.177.8:10548/recommendation/recommend/', {
+                fetch('/recommendation/recommend/', {
                     method: "POST", // *GET, POST, PUT, DELETE, etc.
                     mode: "cors", // no-cors, cors, *same-origin
                     cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached

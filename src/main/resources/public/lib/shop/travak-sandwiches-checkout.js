@@ -24,19 +24,21 @@ class DenTravakSandwichesCheckout extends DenTravakAbstractElement {
         order.sandwichId = this.sandwich.id;
         order.name = this.sandwich.name;
         order.price = this.sandwich.price;
+        console.log(order.name + order.sandwichId);
         //order.phoneNumber = '012345677';
+        console.log(this.byCss('input[name="typeBrood"]:checked').value);
         order.breadType = this.byCss('input[name="typeBrood"]:checked').value;
         order.mobilePhoneNumber = this.byCss('input[id="mobile-phone-number"]').value;
 
-        fetch("/den-travak/orders", {
-            method: "POST",
+        fetch('/den-travak/orders', {
+            method: 'POST',
             headers: {
                 "Content-Type": "application/json; charset=utf-8",
             },
             body: JSON.stringify(order),
         })
             .then((response) => {
-                if(!response.ok) throw new Error(response.status + "\n" + response.statusText);
+                if(!response.ok) throw new Error(response.status + "");
                 else this.app().dispatchEvent(new CustomEvent('order-succeeded', {detail: order}));
             })
     }

@@ -13,10 +13,7 @@ import javax.inject.Inject;
 import javax.naming.ServiceUnavailableException;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.Collections;
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 
 @RestController
 public class SandwichController {
@@ -37,17 +34,42 @@ public class SandwichController {
             //TODO: sort allSandwiches by float in preferences
             Iterable<Sandwich> allSandwiches = repository.findAll();
             List<Sandwich> sandwiches = (List<Sandwich>) allSandwiches;
-            return sortSandwichList(preferences, sandwiches);
+            List<UUID> sortedKeys = new ArrayList<>();
+
+            sortSandwichList(preferences, sortedKeys);
+            for(int i = 0; i < sortedKeys.size(); i++){
+                for (int j = 0; j < sandwiches.size(); j++){
+                    if(sortedKeys.get(i).equals(sandwiches.get(j).getId())){
+                        Collections.swap(sandwiches, i, j);
+                    }
+                }
+            }
+
+            return sandwiches;
         } catch (ServiceUnavailableException e) {
-            return repository.findAll();
-        } catch (NullPointerException e){
             return repository.findAll();
         }
     }
 
-    private List<Sandwich> sortSandwichList(SandwichPreferences prefs, List<Sandwich> allSandwiches){
-        allSandwiches.sort((Sandwich s1, Sandwich s2) -> prefs.getRatingForSandwich(s2.getId()).compareTo(prefs.getRatingForSandwich(s1.getId())));
-        return allSandwiches;
+    void sortSandwichList(SandwichPreferences prefs, List<UUID> sortedKeys){
+        if(prefs.size() > 1){
+            float minRate = -9999;
+            for(UUID key : prefs.keySet())
+            {
+                float currentRating = prefs.getRatingForSandwich(key);
+                if(minRate < currentRating) {
+                    minRate = currentRating;
+                    sortedKeys.add(key);
+                    prefs.remove(key);
+                    sortSandwichList(prefs, sortedKeys);
+                    break;
+                }
+            }
+        }else {
+            sortedKeys.add((UUID) prefs.keySet().toArray()[0]);
+        }
+        //allSandwiches.sort((Sandwich s1, Sandwich s2) -> prefs.getRatingForSandwich(s2.getId()).compareTo(prefs.getRatingForSandwich(s1.getId())));
+        //return allSandwiches;
     }
 
     @RequestMapping(value = "/sandwiches", method = RequestMethod.POST)

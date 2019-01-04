@@ -38,15 +38,20 @@ public class SandwichController {
             if(preferences.size() > 1) {
                 float max = -9999;
                 List<Sandwich> sortedList = new ArrayList<>();
-                //Map<UUID, Float> ratings = new HashMap<>();
+                List<Sandwich> sortResidue = new ArrayList<>();
 
                 for(Sandwich s : allSandwiches){
-                    if (preferences.getRatingForSandwich(s.getId()) > max){
-                        max = preferences.getRatingForSandwich(s.getId());
-                        sortedList.add(s);
+                    if(preferences.getRatingForSandwich(s.getId()) == null){
+                        sortResidue.add(s);
+                    }else {
+                        if (preferences.getRatingForSandwich(s.getId()) > max){
+                            max = preferences.getRatingForSandwich(s.getId());
+                            sortedList.add(s);
+                        }
                     }
-                    //ratings.put(s.getId(), preferences.getRatingForSandwich(s.getId()));
                 }
+
+                sortedList.addAll(sortResidue);
 
                 return sortedList;
             }else return allSandwiches;

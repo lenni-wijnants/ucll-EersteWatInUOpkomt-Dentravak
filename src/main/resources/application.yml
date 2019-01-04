@@ -10,6 +10,6 @@ spring:
         healthCheckPath: /health-check
         healthCheckInterval: 20s
 server:
-  port: 8080
+  port: 10548
   servlet:
     context-path: /den-travak

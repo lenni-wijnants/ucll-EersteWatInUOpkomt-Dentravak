@@ -55,20 +55,10 @@ public class SandwichController {
                     }
                 }
 
-                for(Sandwich s : allSandwiches){
-                    if(preferences.getRatingForSandwich(s.getId()) == null){
-                        sortResidue.add(s);
-                    }else {
-                        if(preferences.getRatingForSandwich(s.getId()) > max){
-                            sortedList = insertAtStartOfList(sortedList, s);
-                        }else {
-                            sortedList.add(s);
-                        }
-                    }
-                }
-                sortedList.addAll(sortResidue);
 
-                return sortedList;
+                allSandwiches.addAll(sortResidue);
+
+                return allSandwiches;
             }else return allSandwiches;
         } catch (ServiceUnavailableException e) {
             return repository.findAll();

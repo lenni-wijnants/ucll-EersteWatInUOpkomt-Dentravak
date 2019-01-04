@@ -18,7 +18,7 @@ import java.math.BigDecimal;
 @EnableDiscoveryClient
 public class Application {
 
-    public static void main(String[] args) {
+    public static void main2(String[] args) {
         SpringApplication.run(Application.class, args);
     }
 

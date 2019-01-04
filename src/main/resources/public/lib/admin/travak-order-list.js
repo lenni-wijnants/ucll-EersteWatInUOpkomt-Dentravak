@@ -8,8 +8,7 @@ class DenTravakOrderList extends DenTravakAbstractElement {
 
     connectedCallback() {
         super.connectedCallback();
-        let today = new Date();
-        fetch('/den-travak/orders/bydate/' + today)
+        fetch('/den-travak/orders/')
             .then(resp => resp.json())
             .then(json => this.updateOrderList(json));
         this.initEventListeners();
@@ -20,9 +19,20 @@ class DenTravakOrderList extends DenTravakAbstractElement {
     }
 
     updateOrderList(orders) {
+        let today = new Date();
+        today.setHours(0, 0, 0);
+
+        let tomorrow = new Date();
+        tomorrow.setHours(23, 59, 59);
+
+        let filteredData = orders.filter(function (product) {
+            const date = new Date(product.creationDate);
+            return (date >= today && date <= tomorrow);
+        });
+
         let orderList = this.byId('orders');
         orderList.innerHTML = ``;
-        orders.forEach(order => {
+        filteredData.forEach(order => {
             let orderEl = htmlToElement(this.getOrderTemplate(order));
             orderList.appendChild(orderEl);
         });

@@ -28,18 +28,12 @@ public class SandwichOrderController {
         return repository.save(sandwichOrder);
     }
 
-    @RequestMapping(value = "/orders/{id}", method = RequestMethod.PUT)
-    public SandwichOrder updateSandwichOrder(@PathVariable UUID id, @RequestBody SandwichOrder sandwichOrder) {
-        if(!id.equals(sandwichOrder.getId())) throw new IllegalArgumentException("Nownow, are you trying to hack us.");
-        return repository.save(sandwichOrder);
-    }
-
     @RequestMapping(value = "/orders/{id}", method = RequestMethod.GET)
     public SandwichOrder getOrder(@PathVariable("id") UUID id) {
         return repository.findById(id).get();
     }
 
-    @RequestMapping(value = "/orders/bydate/{date}", method = RequestMethod.GET)
+    @RequestMapping(value = "/orders/{date}", method = RequestMethod.GET)
     public Iterable<SandwichOrder> getOrder(@PathVariable("date") LocalDateTime date) {
         return repository.findAllByDate(date);
     }

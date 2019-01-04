@@ -4,7 +4,6 @@ import be.ucll.da.dentravak.model.Sandwich;
 import be.ucll.da.dentravak.model.SandwichPreferences;
 import be.ucll.da.dentravak.repositories.SandwichRepository;
 import com.google.common.collect.Lists;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestClientException;
@@ -13,7 +12,6 @@ import org.springframework.web.client.RestTemplate;
 import javax.inject.Inject;
 import javax.naming.ServiceUnavailableException;
 import java.net.URI;
-import java.net.URISyntaxException;
 import java.util.*;
 
 @RestController
@@ -39,20 +37,35 @@ public class SandwichController {
                 float max = -9999;
                 List<Sandwich> sortedList = new ArrayList<>();
                 List<Sandwich> sortResidue = new ArrayList<>();
+                Sandwich fill = new Sandwich();
+
+                for(int i = 0; i < allSandwiches.size(); i++){
+                    for(int j = 0; j < allSandwiches.size(); j++){
+                        if(preferences.getRatingForSandwich(allSandwiches.get(i).getId()) == null) {
+                            sortResidue.add(allSandwiches.get(i));
+                            allSandwiches.remove(i);
+                        }else if (preferences.getRatingForSandwich(allSandwiches.get(j).getId()) == null) {
+                            sortResidue.add(allSandwiches.get(j));
+                            allSandwiches.remove(j);
+                        }else if(preferences.getRatingForSandwich(allSandwiches.get(i).getId()) < preferences.getRatingForSandwich(allSandwiches.get(j).getId())){
+                            Sandwich temp = allSandwiches.get(i);
+                            allSandwiches.set(i, allSandwiches.get(j));
+                            allSandwiches.set(j, temp);
+                        }
+                    }
+                }
 
                 for(Sandwich s : allSandwiches){
                     if(preferences.getRatingForSandwich(s.getId()) == null){
                         sortResidue.add(s);
                     }else {
-                        sortedList.add(null);
-                        for(int i = sortedList.size() - 1; i > 0; i--)
-                        {
-                            sortedList.set(i + 1, sortedList.get(i));
+                        if(preferences.getRatingForSandwich(s.getId()) > max){
+                            sortedList = insertAtStartOfList(sortedList, s);
+                        }else {
+                            sortedList.add(s);
                         }
-                        sortedList.set(0, s);
                     }
                 }
-
                 sortedList.addAll(sortResidue);
 
                 return sortedList;
@@ -60,6 +73,16 @@ public class SandwichController {
         } catch (ServiceUnavailableException e) {
             return repository.findAll();
         }
+    }
+
+    List<Sandwich> insertAtStartOfList(List<Sandwich> sandwiches, Sandwich s){
+        List<Sandwich> newList = new ArrayList<>(sandwiches.size() + 1);
+        newList.set(0, s);
+        for(int i = 0; i < sandwiches.size(); i++){
+            newList.set(i + 1, sandwiches.get(i));
+        }
+
+        return newList;
     }
 
     @RequestMapping(value = "/sandwiches", method = RequestMethod.POST)

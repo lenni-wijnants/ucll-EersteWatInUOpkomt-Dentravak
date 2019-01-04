@@ -44,10 +44,12 @@ public class SandwichController {
                     if(preferences.getRatingForSandwich(s.getId()) == null){
                         sortResidue.add(s);
                     }else {
-                        if (preferences.getRatingForSandwich(s.getId()) > max){
-                            max = preferences.getRatingForSandwich(s.getId());
-                            sortedList.add(s);
+                        sortedList.add(null);
+                        for(int i = sortedList.size() - 1; i > 0; i--)
+                        {
+                            sortedList.set(i + 1, sortedList.get(i));
                         }
+                        sortedList.set(0, s);
                     }
                 }
 

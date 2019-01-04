@@ -28,6 +28,12 @@ public class SandwichOrderController {
         return repository.save(sandwichOrder);
     }
 
+    @RequestMapping(value = "/orders/{id}", method = RequestMethod.PUT)
+    public SandwichOrder updateSandwichOrder(@PathVariable UUID id, @RequestBody SandwichOrder sandwichOrder) {
+        if(!id.equals(sandwichOrder.getId())) throw new IllegalArgumentException("Nownow, are you trying to hack us.");
+        return repository.save(sandwichOrder);
+    }
+
     @RequestMapping(value = "/orders/{id}", method = RequestMethod.GET)
     public SandwichOrder getOrder(@PathVariable("id") UUID id) {
         return repository.findById(id).get();

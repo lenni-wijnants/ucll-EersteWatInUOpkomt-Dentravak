@@ -59,8 +59,8 @@ public class Application {
             // for (Customer bauer : repository.findByLastName("Bauer")) {
             // 	log.info(bauer.toString());
             // }
-            log.info("");
-            */
+            log.info("");*/
+
         };
     }
 

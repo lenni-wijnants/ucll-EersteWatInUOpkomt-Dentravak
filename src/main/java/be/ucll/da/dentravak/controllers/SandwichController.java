@@ -3,6 +3,7 @@ package be.ucll.da.dentravak.controllers;
 import be.ucll.da.dentravak.model.Sandwich;
 import be.ucll.da.dentravak.model.SandwichPreferences;
 import be.ucll.da.dentravak.repositories.SandwichRepository;
+import com.google.common.collect.Lists;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.web.bind.annotation.*;
@@ -32,9 +33,8 @@ public class SandwichController {
         try {
             SandwichPreferences preferences = getPreferences("ronald.dehuysser@ucll.be");
             //TODO: sort allSandwiches by float in preferences
-            Iterable<Sandwich> allSandwiches = repository.findAll();
-            List<Sandwich> sandwiches = (List<Sandwich>) allSandwiches;
-            List<Sandwich> sortedSandwiches = new ArrayList<>(sandwiches.size());
+            ArrayList<Sandwich> sandwiches = Lists.newArrayList(repository.findAll());
+            List<Sandwich> sortedSandwiches = new ArrayList<>(((List<Sandwich>) sandwiches).size());
             float max = preferences.getRatingForSandwich(sandwiches.get(0).getId());
             int m = 0;
             int z = 0;

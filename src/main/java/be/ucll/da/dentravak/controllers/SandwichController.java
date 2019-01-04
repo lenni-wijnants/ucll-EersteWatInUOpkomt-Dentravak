@@ -40,6 +40,8 @@ public class SandwichController {
             return sortSandwichList(preferences, sandwiches);
         } catch (ServiceUnavailableException e) {
             return repository.findAll();
+        } catch (NullPointerException e){
+            return repository.findAll();
         }
     }
 

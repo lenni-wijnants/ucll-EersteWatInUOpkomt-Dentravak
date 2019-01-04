@@ -27,7 +27,7 @@ class DenTravakSandwichesCheckout extends DenTravakAbstractElement {
         console.log(order.name + order.sandwichId);
         //order.phoneNumber = '012345677';
         console.log(this.byCss('input[name="typeBrood"]:checked').value);
-        order.breadType = this.byCss('input[name="typeBrood"]:checked').text;
+        order.breadType = this.byCss('input[name="typeBrood"]:checked').value;
         order.mobilePhoneNumber = this.byCss('input[id="mobile-phone-number"]').value;
 
         fetch('/den-travak/orders', {
@@ -71,19 +71,19 @@ class DenTravakSandwichesCheckout extends DenTravakAbstractElement {
                 <div class="form-group">
                     <label for="typeBrood"><h4>Kies het type brood</h4></label>
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="typeBrood" id="radioBoterhammekes" value="option1">
+                        <input class="form-check-input" type="radio" name="typeBrood" id="radioBoterhammekes" value="BOTERHAMMEKES">
                         <label class="form-check-label" for="radioBoterhammekes">
                             Boterhammekes
                         </label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="typeBrood" id="radioWrap" value="option2">
+                        <input class="form-check-input" type="radio" name="typeBrood" id="radioWrap" value="WRAP">
                         <label class="form-check-label" for="radioWrap">
                             Wrap
                         </label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="typeBrood" id="radioTurksBrood" value="option3">
+                        <input class="form-check-input" type="radio" name="typeBrood" id="radioTurksBrood" value="TURKS_BROOD">
                         <label class="form-check-label" for="radioTurksBrood">
                             Turks brood
                         </label>

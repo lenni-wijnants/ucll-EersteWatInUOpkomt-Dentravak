@@ -17,7 +17,7 @@ class DenTravakSandwichesOrderConfirmation extends DenTravakAbstractElement {
             .forEach(scoreBtn => scoreBtn.addEventListener('click', e => {
 
                 let recommendedItem = {};
-                recommendedItem.emailAddress = this.order.mobilePhoneNumber;
+                recommendedItem.emailAddress = "ronald.dehuysser@ucll.be";
                 recommendedItem.ratedItem = this.order.sandwichId;
                 recommendedItem.rating = scoreBtn.dataset.score;
 

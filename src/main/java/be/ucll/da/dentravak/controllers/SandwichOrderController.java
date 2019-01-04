@@ -2,12 +2,11 @@ package be.ucll.da.dentravak.controllers;
 
 import be.ucll.da.dentravak.model.SandwichOrder;
 import be.ucll.da.dentravak.repositories.SandwichOrderRepository;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.joda.time.DateTime;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 @RestController
 public class SandwichOrderController {
@@ -29,6 +28,15 @@ public class SandwichOrderController {
         return repository.save(sandwichOrder);
     }
 
+    @RequestMapping(value = "/orders/{id}", method = RequestMethod.GET)
+    public SandwichOrder getOrder(@PathVariable("id") UUID id) {
+        return repository.findById(id).get();
+    }
+
+    @RequestMapping(value = "/orders/{date}", method = RequestMethod.GET)
+    public Iterable<SandwichOrder> getOrder(@PathVariable("date") LocalDateTime date) {
+        return repository.findAllByDate(date);
+    }
 
 }
 

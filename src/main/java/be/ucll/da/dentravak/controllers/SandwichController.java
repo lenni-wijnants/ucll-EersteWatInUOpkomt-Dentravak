@@ -13,6 +13,8 @@ import javax.inject.Inject;
 import javax.naming.ServiceUnavailableException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.Collections;
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -34,10 +36,16 @@ public class SandwichController {
             SandwichPreferences preferences = getPreferences("ronald.dehuysser@ucll.be");
             //TODO: sort allSandwiches by float in preferences
             Iterable<Sandwich> allSandwiches = repository.findAll();
-            return allSandwiches;
+            List<Sandwich> sandwiches = (List<Sandwich>) allSandwiches;
+            return sortSandwichList(preferences, sandwiches);
         } catch (ServiceUnavailableException e) {
             return repository.findAll();
         }
+    }
+
+    private List<Sandwich> sortSandwichList(SandwichPreferences prefs, List<Sandwich> allSandwiches){
+        allSandwiches.sort((Sandwich s1, Sandwich s2) -> prefs.getRatingForSandwich(s2.getId()).compareTo(prefs.getRatingForSandwich(s1.getId())));
+        return allSandwiches;
     }
 
     @RequestMapping(value = "/sandwiches", method = RequestMethod.POST)

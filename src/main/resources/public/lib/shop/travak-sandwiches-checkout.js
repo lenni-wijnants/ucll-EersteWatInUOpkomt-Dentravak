@@ -27,7 +27,7 @@ class DenTravakSandwichesCheckout extends DenTravakAbstractElement {
         console.log(order.name + order.sandwichId);
         //order.phoneNumber = '012345677';
         console.log(this.byCss('input[name="typeBrood"]:checked').value);
-        order.breadType = this.byCss('input[name="typeBrood"]:checked').value;
+        order.breadType = this.byCss('input[name="typeBrood"]:checked').value.toUpperCase();
         order.mobilePhoneNumber = this.byCss('input[id="mobile-phone-number"]').value;
 
         fetch('/den-travak/orders', {

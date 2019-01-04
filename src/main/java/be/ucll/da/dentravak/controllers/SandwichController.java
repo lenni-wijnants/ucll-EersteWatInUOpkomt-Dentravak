@@ -34,7 +34,7 @@ public class SandwichController {
             //TODO: sort allSandwiches by float in preferences
             Iterable<Sandwich> allSandwiches = repository.findAll();
             List<Sandwich> sandwiches = (List<Sandwich>) allSandwiches;
-            List<UUID> sortedKeys = new ArrayList<>();
+            ArrayList<UUID> sortedKeys = new ArrayList<>();
 
             sortSandwichList(preferences, sortedKeys);
             for(int i = 0; i < sortedKeys.size(); i++){
@@ -51,21 +51,20 @@ public class SandwichController {
         }
     }
 
-    void sortSandwichList(SandwichPreferences prefs, List<UUID> sortedKeys){
-        if(prefs.size() > 1){
-            float minRate = -9999;
-            for(UUID key : prefs.keySet())
-            {
+    void sortSandwichList(SandwichPreferences prefs, ArrayList<UUID> sortedKeys){
+        if(prefs.size() > 1) {
+            float smallestRating = -999;
+            for (UUID key : prefs.keySet()) {
                 float currentRating = prefs.getRatingForSandwich(key);
-                if(minRate < currentRating) {
-                    minRate = currentRating;
+                if (smallestRating < currentRating) {
+                    smallestRating = currentRating;
                     sortedKeys.add(key);
                     prefs.remove(key);
                     sortSandwichList(prefs, sortedKeys);
                     break;
                 }
             }
-        }else {
+        } else {
             sortedKeys.add((UUID) prefs.keySet().toArray()[0]);
         }
         //allSandwiches.sort((Sandwich s1, Sandwich s2) -> prefs.getRatingForSandwich(s2.getId()).compareTo(prefs.getRatingForSandwich(s1.getId())));

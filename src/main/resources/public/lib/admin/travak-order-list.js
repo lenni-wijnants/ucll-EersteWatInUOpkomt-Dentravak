@@ -9,7 +9,7 @@ class DenTravakOrderList extends DenTravakAbstractElement {
     connectedCallback() {
         super.connectedCallback();
         let today = new Date();
-        fetch('/den-travak/orders/' + today)
+        fetch('/den-travak/orders/bydate/' + today)
             .then(resp => resp.json())
             .then(json => this.updateOrderList(json));
         this.initEventListeners();

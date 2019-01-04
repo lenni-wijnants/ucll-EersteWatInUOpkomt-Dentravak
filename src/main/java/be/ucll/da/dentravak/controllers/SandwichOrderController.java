@@ -33,7 +33,7 @@ public class SandwichOrderController {
         return repository.findById(id).get();
     }
 
-    @RequestMapping(value = "/orders/{date}", method = RequestMethod.GET)
+    @RequestMapping(value = "/orders/bydate/{date}", method = RequestMethod.GET)
     public Iterable<SandwichOrder> getOrder(@PathVariable("date") LocalDateTime date) {
         return repository.findAllByDate(date);
     }

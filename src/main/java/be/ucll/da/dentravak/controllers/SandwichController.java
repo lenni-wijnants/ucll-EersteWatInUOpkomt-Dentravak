@@ -54,7 +54,7 @@ public class SandwichController {
                         }
                     }
                 }
-
+                Collections.reverse(allSandwiches);
 
                 allSandwiches.addAll(sortResidue);
 

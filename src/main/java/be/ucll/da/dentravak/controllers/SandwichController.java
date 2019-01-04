@@ -35,39 +35,21 @@ public class SandwichController {
             //TODO: sort allSandwiches by float in preferences
             ArrayList<Sandwich> allSandwiches = Lists.newArrayList(repository.findAll());
 
-            ArrayList<UUID> keys = new ArrayList<>();
+            float max = -9999;
+            List<Sandwich> sortedList = new ArrayList<>();
+            //Map<UUID, Float> ratings = new HashMap<>();
 
-            addIdsInOrder(preferences, keys);
-
-            for(int i = 0; i < keys.size(); i++) {
-                for(int j = 0; j < allSandwiches.size(); j++) {
-                    if(keys.get(i).equals(allSandwiches.get(j).getId())) {
-                        Collections.swap(allSandwiches, i, j);
-                    }
+            for(Sandwich s : allSandwiches){
+                if (preferences.getRatingForSandwich(s.getId()) > max){
+                    max = preferences.getRatingForSandwich(s.getId());
+                    sortedList.add(s);
                 }
+                //ratings.put(s.getId(), preferences.getRatingForSandwich(s.getId()));
             }
 
-            return allSandwiches;
+            return sortedList;
         } catch (ServiceUnavailableException e) {
             return repository.findAll();
-        }
-    }
-
-    private void addIdsInOrder(SandwichPreferences preferences, ArrayList<UUID> keys) {
-        if(preferences.size() > 1) {
-            float smallestRating = -1;
-            for (UUID key : preferences.keySet()) {
-                float currentRating = preferences.getRatingForSandwich(key);
-                if (smallestRating < currentRating) {
-                    smallestRating = currentRating;
-                    keys.add(key);
-                    preferences.remove(key);
-                    addIdsInOrder(preferences, keys);
-                    break;
-                }
-            }
-        } else {
-            keys.add((UUID) preferences.keySet().toArray()[0]);
         }
     }
 

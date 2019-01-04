@@ -10,6 +10,6 @@ import java.util.List;
 import java.util.UUID;
 
 public interface SandwichOrderRepository extends CrudRepository<SandwichOrder, UUID> {
-    @Query("select a from LunchOrder a where SUBSTRING(a.creationDate, 1, 8) = SUBSTRING(:creationDate, 1, 8)")
+    @Query("select a from SandwichOrder a where SUBSTRING(a.creationDate, 1, 8) = SUBSTRING(:creationDate, 1, 8)")
     List<SandwichOrder> findAllByDate(@Param("creationDate") LocalDateTime creationDate );
 }

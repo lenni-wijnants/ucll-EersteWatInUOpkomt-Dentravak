@@ -16,7 +16,8 @@ class DenTravakOrderList extends DenTravakAbstractElement {
 
     initEventListeners() {
         this.byId('edit-sandwiches-btn').addEventListener('click', (e) => this.app().showSandwichList());
-        this.byId('orders-today-btn').addEventListener('click', (e) => this.app().showOrdersOfToday());
+        this.byId('orders-today-btn').addEventListener('click', (e) => this.dayOrderList());
+        this.byId('dl-today-btn').addEventListener('click', (e) => this.csvDayOrderList());
     }
 
     updateOrderList(orders) {
@@ -27,6 +28,70 @@ class DenTravakOrderList extends DenTravakAbstractElement {
             orderList.appendChild(orderEl);
         });
     }
+
+    dayOrderList() {
+        fetch('/den-travak/orders/')
+            .then(resp => resp.json())
+            .then(json => {
+                let today = new Date();
+                today.setHours(0, 0, 0);
+
+                let tomorrow = new Date();
+                tomorrow.setHours(23, 59, 59);
+
+                let filteredData = orders.filter(function (product) {
+                    const date = new Date(product.creationDate);
+                    return (date >= today && date <= tomorrow);
+                });
+
+                this.updateOrderList(filteredData);
+            });
+
+
+    }
+
+   csvDayOrderList() {
+        fetch('/den-travak/orders')
+            .then(resp => resp.json())
+            .then(json => {
+                let today = new Date();
+                today.setHours(0, 0, 0);
+
+                let tomorrow = new Date();
+                tomorrow.setHours(23, 59, 59);
+
+                let filteredData = json.filter(function (product) {
+                    const date = new Date(product.creationDate);
+                    return (date >= today && date <= tomorrow);
+                });
+
+                const table = document.getElementById("orders");
+                for (let i = 0; i < table.length; i++) {
+                    const printedCell = document.createElement("p");
+                    printedCell.innerHTML = "true";
+                    table[i].appendChild(printedCell);
+                };
+
+                var data = []
+                for(var i = 0; i < filteredData.length; i++) {
+                    data.push([filteredData[i].id, filteredData[i].sandwichId,
+                        filteredData[i].name, filteredData[i].breadType,
+                        filteredData[i].price, filteredData[i].mobilePhoneNumber, filteredData[i].creationDate]);
+                }
+                var separate = 'sep=,\r\n';
+                var csv = separate + 'ID,SandwichID,Name,BreadType,Price,MobilePhoneNumber,CreationDate\n';
+                data.forEach(function(row) {
+                    csv += row.join(',');
+                    csv += "\n";
+                });
+                var hiddenElement = document.createElement('a');
+                hiddenElement.href = 'data:text/csv;charset=utf-8,' + encodeURI(csv);
+                hiddenElement.target = '_blank';
+                hiddenElement.download = 'orders.csv';
+                hiddenElement.click();
+            });
+    }
+
 
     get template() {
         return `
@@ -57,6 +122,7 @@ class DenTravakOrderList extends DenTravakAbstractElement {
                     <h4>Den Travak Bestellingen</h4>
                     <button id="edit-sandwiches-btn" type="button" class="btn btn-primary">Bewerk broodjeslijst</button>
                     <button id="orders-today-btn" type="button" class="btn btn-primary">Toon bestellingen van vandaag</button>
+                    <button id="dl-today-btn" type="button" class="btn btn-primary">Download bestellingen van vandaag</button>
                 </div>
                 <div>
                 <ul id="orders" class="list-group">

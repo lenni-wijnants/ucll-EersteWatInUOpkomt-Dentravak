@@ -82,12 +82,12 @@ class DenTravakOrderList extends DenTravakAbstractElement {
                 });
 
                 let table = document.getElementById("orders");
-                alert(table.children.length);
                 for (let i = 0; i < table.children.length; i++) {
                     let printedCell = document.getElementById("dlText");
                     printedCell.innerHTML = "true";
                 }
-
+                alert(table.length);
+                alert(table.children.length);
                 let data = [];
                 for(let i = 0; i < filteredData.length; i++) {
                     data.push([filteredData[i].id, filteredData[i].sandwichId,
@@ -148,20 +148,6 @@ class DenTravakOrderList extends DenTravakAbstractElement {
     }
 
     getOrderTemplate(order) {
-        /*return `
-            <a class="list-group-item" id="listItem">
-                <button type="button" class="btn btn-primary bmd-btn-fab">
-                    ${order.name.charAt(0)}
-                </button>
-                <div class="bmd-list-group-col">
-                    <p class="list-group-item-heading">${order.mobilePhoneNumber}<span class="creationDate">${dateFns.distanceInWordsToNow(order.creationDate)} ago</span></p>
-                    <p class="list-group-item-text">${order.name} - ${order.breadType.toLowerCase()}</p>
-                </div>
-                <div class="dt-order-info">
-                    <p class="list-group-item-text">${order.price}</p>
-                </div>
-            </a>
-        `;*/
         return `
             <li class="bestelling">
                 <div class="bestelling-body">

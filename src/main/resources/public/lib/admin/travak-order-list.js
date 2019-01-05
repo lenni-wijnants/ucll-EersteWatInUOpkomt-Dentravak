@@ -71,12 +71,13 @@ class DenTravakOrderList extends DenTravakAbstractElement {
                         filteredData[i].price, filteredData[i].mobilePhoneNumber, filteredData[i].creationDate]);
                 }
 
+                let csv = "";
                 data.forEach(function(rowArray){
                     let row = rowArray.join(",");
-                    csvContent += row + "\r\n";
+                    csv += row + "\r\n";
                 });
 
-                let csvContent = "data:text/csv;charset=utf-8,";
+                let csvContent = "data:text/csv;charset=utf-8," + csv;
                 let encodedUri = encodeURI(csvContent);
                 let link = document.createElement("a");
                 link.setAttribute("href", encodedUri);

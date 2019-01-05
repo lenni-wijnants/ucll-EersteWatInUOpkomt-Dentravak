@@ -16,20 +16,31 @@ class DenTravakOrderList extends DenTravakAbstractElement {
 
     initEventListeners() {
         this.byId('edit-sandwiches-btn').addEventListener('click', (e) => this.app().showSandwichList());
-        this.byId('orders-today-btn').addEventListener('click', (e) => this.dayOrderList());
+        //this.byId('orders-today-btn').addEventListener('click', (e) => this.dayOrderList());
         this.byId('dl-today-btn').addEventListener('click', (e) => this.csvDayOrderList());
     }
 
     updateOrderList(orders) {
+        let today = new Date();
+        today.setHours(0, 0, 0);
+
+        let tomorrow = new Date();
+        tomorrow.setHours(23, 59, 59);
+
+        let filteredData = orders.filter(function (product) {
+            const date = new Date(product.creationDate);
+            return (date >= today && date <= tomorrow);
+        });
+
         let orderList = this.byId('orders');
         orderList.innerHTML = ``;
-        orders.forEach(order => {
+        filteredData.forEach(order => {
             let orderEl = htmlToElement(this.getOrderTemplate(order));
             orderList.appendChild(orderEl);
         });
     }
 
-    dayOrderList() {
+    /*dayOrderList() {
         fetch('/den-travak/orders/')
             .then(resp => resp.json())
             .then(json => {
@@ -44,11 +55,16 @@ class DenTravakOrderList extends DenTravakAbstractElement {
                     return (date >= today && date <= tomorrow);
                 });
 
-                this.updateOrderList(filteredData);
+                let orderList = this.byId('orders');
+                orderList.innerHTML = ``;
+                filteredData.forEach(order => {
+                    let orderEl = htmlToElement(this.getOrderTemplate(order));
+                    orderList.appendChild(orderEl);
+                });
             });
 
 
-    }
+    }*/
 
    csvDayOrderList() {
         fetch('/den-travak/orders')
@@ -121,19 +137,30 @@ class DenTravakOrderList extends DenTravakAbstractElement {
                 <div class="travak-header">
                     <h4>Den Travak Bestellingen</h4>
                     <button id="edit-sandwiches-btn" type="button" class="btn btn-primary">Bewerk broodjeslijst</button>
-                    <button id="orders-today-btn" type="button" class="btn btn-primary">Toon bestellingen van vandaag</button>
-                    <button id="dl-today-btn" type="button" class="btn btn-primary">Download bestellingen van vandaag</button>
                 </div>
                 <div>
-                <ul id="orders" class="list-group">
-                </ul>
+                    <ul id="orders" class="list-group">
+                    </ul>
                 </div>
+                <button id="dl-today-btn" type="button" class="btn btn-primary">Download bestellingen van vandaag</button>
             </div>
         `;
     }
 
+    /*<div class="animate">
+        <div class="travak-header">
+            <h4>Den Travak Bestellingen</h4>
+            <button id="edit-sandwiches-btn" type="button" class="btn btn-primary">Bewerk broodjeslijst</button>
+            <button id="dl-today-btn" type="button" class="btn btn-primary">Download bestellingen van vandaag</button>
+        </div>
+        <div>
+        <ul id="orders" class="list-group">
+        </ul>
+        </div>
+    </div>*/
+
     getOrderTemplate(order) {
-        return `
+        /*return `
             <a class="list-group-item" id="listItem">
                 <button type="button" class="btn btn-primary bmd-btn-fab">
                     ${order.name.charAt(0)}
@@ -146,6 +173,24 @@ class DenTravakOrderList extends DenTravakAbstractElement {
                     <p class="list-group-item-text">${order.price}</p>
                 </div>
             </a>
+        `;*/
+        return `
+            <div class="card">
+                <div class="card-body">
+                    <a class="list-group-item">
+                        <button type="button" class="btn btn-primary bmd-btn-fab">
+                            ${order.name.charAt(0)}
+                        </button>
+                        <div class="bmd-list-group-col">
+                            <p class="list-group-item-heading">Telefoon nummer: ${order.mobilePhoneNumber}<span class="creationDate">${dateFns.distanceInWordsToNow(order.creationDate)} ago</span></p>
+                            <p class="list-group-item-text">Bestelling: ${order.name} - ${order.breadType.toLowerCase()}</p>
+                        </div>
+                        <div class="dt-order-info">
+                            <p class="list-group-item-text">Prijs: €${order.price}</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
         `;
     }
 }

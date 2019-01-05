@@ -175,7 +175,7 @@ class DenTravakOrderList extends DenTravakAbstractElement {
             </a>
         `;*/
         return `
-            <div class="bestelling">
+            <li class="bestelling">
                 <div class="bestelling-body">
                     <a class="list-group-item">
                         <button type="button" class="btn btn-primary bmd-btn-fab">
@@ -191,7 +191,7 @@ class DenTravakOrderList extends DenTravakAbstractElement {
                     </a>
                     <p id="dlText"></p>
                 </div>
-            </div>
+            </li>
         `;
     }
 }

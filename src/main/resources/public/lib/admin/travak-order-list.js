@@ -62,7 +62,7 @@ class DenTravakOrderList extends DenTravakAbstractElement {
                     dl.innerHTML = "true";
                 }
 
-                let data = [];
+                /*let data = [];
                 for(let i = 0; i < filteredData.length; i++) {
                     data.push([filteredData[i].id, filteredData[i].sandwichId,
                         filteredData[i].name, filteredData[i].breadType,
@@ -78,7 +78,7 @@ class DenTravakOrderList extends DenTravakAbstractElement {
                 hiddenElement.href = 'data:text/csv;charset=utf-8,' + encodeURI(csv);
                 hiddenElement.target = '_blank';
                 hiddenElement.download = 'orders.csv';
-                hiddenElement.click();
+                hiddenElement.click();*/
             });
     }
 

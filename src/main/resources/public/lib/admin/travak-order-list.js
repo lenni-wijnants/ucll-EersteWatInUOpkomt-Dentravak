@@ -82,8 +82,8 @@ class DenTravakOrderList extends DenTravakAbstractElement {
                 });
 
                 let table = document.getElementById("orders");
-                alert(table.childElementCount);
-                for (let i = 0; i < table.childElementCount; i++) {
+                alert(table.children.length);
+                for (let i = 0; i < table.children.length; i++) {
                     let printedCell = document.getElementById("dlText");
                     printedCell.innerHTML = "true";
                 }
@@ -147,18 +147,6 @@ class DenTravakOrderList extends DenTravakAbstractElement {
         `;
     }
 
-
-    /*<div class="animate">
-        <div class="travak-header">
-            <h4>Den Travak Bestellingen</h4>
-            <button id="edit-sandwiches-btn" type="button" class="btn btn-primary">Bewerk broodjeslijst</button>
-            <button id="dl-today-btn" type="button" class="btn btn-primary">Download bestellingen van vandaag</button>
-        </div>
-        <div>
-        <ul id="orders" class="list-group">
-        </ul>
-        </div>
-    </div>*/
     getOrderTemplate(order) {
         /*return `
             <a class="list-group-item" id="listItem">
@@ -189,7 +177,7 @@ class DenTravakOrderList extends DenTravakAbstractElement {
                             <p class="list-group-item-text">Prijs: €${order.price}</p>
                         </div>
                     </a>
-                    <p id="dlText"></p>
+                    <p id="dlText">false</p>
                 </div>
             </li>
         `;

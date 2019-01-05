@@ -81,7 +81,6 @@ class DenTravakOrderList extends DenTravakAbstractElement {
             });
     }
 
-
     get template() {
         return `
             <style>
@@ -133,7 +132,9 @@ class DenTravakOrderList extends DenTravakAbstractElement {
                 <div class="dt-order-info">
                     <p class="list-group-item-text">Prijs: €${order.price}</p>
                 </div>
-                <p id="dlText">false</p>
+                <div class="dt-order.info">
+                    <p class="list-group-item-test" id="dlText">false</p>
+                </div>
             </a>
         `;
     }

@@ -64,7 +64,7 @@ class DenTravakOrderList extends DenTravakAbstractElement {
                     table.children[i].append(dl);
                 }
 
-                let data = [];
+                let data = [["Id", "SandwichId", "Name", "Bread Type", "Price", "Phone Number"]];
                 for(let i = 0; i < filteredData.length; i++) {
                     data.push([filteredData[i].id, filteredData[i].sandwichId,
                         filteredData[i].name, filteredData[i].breadType,

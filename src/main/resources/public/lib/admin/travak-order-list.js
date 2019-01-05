@@ -55,10 +55,10 @@ class DenTravakOrderList extends DenTravakAbstractElement {
                 });
 
                 let table = document.getElementById("orders");
-                /*for (let i = 0; i < table.children.length; i++) {
+                for (let i = 0; i < table.length; i++) {
                     let printedCell = document.getElementById("dlText");
                     printedCell.innerHTML = "true";
-                }*/
+                }
                 alert(table.length);
                 alert(table.children.length);
                 let data = [];

@@ -71,7 +71,7 @@ class DenTravakOrderList extends DenTravakAbstractElement {
         let csv = filteredData.map(row => header.map(fieldName => JSON.stringify(row[fieldName], replacer)).join(','));
         csv.unshift(header.join(','));
         csv = csv.join('\r\n');
-        window.open('data:text/csv;charset=utf-8,' + escape(csv));
+        window.open('data:text/csv;charset=utf-8,' + encodeURI(csv));
     }
 
     get template() {

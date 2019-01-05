@@ -28,7 +28,7 @@ class DenTravakOrderList extends DenTravakAbstractElement {
         tomorrow.setHours(23, 59, 59);
 
         let filteredData = orders.filter(function (product) {
-            const date = new Date(product.creationDate);
+            let date = new Date(product.creationDate);
             return (date >= today && date <= tomorrow);
         });
 
@@ -77,29 +77,30 @@ class DenTravakOrderList extends DenTravakAbstractElement {
                 tomorrow.setHours(23, 59, 59);
 
                 let filteredData = json.filter(function (product) {
-                    const date = new Date(product.creationDate);
+                    let date = new Date(product.creationDate);
                     return (date >= today && date <= tomorrow);
                 });
 
-                const table = document.getElementById("orders");
-                for (let i = 0; i < table.length; i++) {
-                    const printedCell = document.getElementById("dl");
+                let table = document.getElementById("orders");
+                alert($("ul > div").length);
+                for (let i = 0; i < $("ul > div").length; i++) {
+                    let printedCell = document.getElementById("dlText");
                     printedCell.innerHTML = "true";
-                };
+                }
 
-                var data = []
-                for(var i = 0; i < filteredData.length; i++) {
+                let data = [];
+                for(let i = 0; i < filteredData.length; i++) {
                     data.push([filteredData[i].id, filteredData[i].sandwichId,
                         filteredData[i].name, filteredData[i].breadType,
                         filteredData[i].price, filteredData[i].mobilePhoneNumber, filteredData[i].creationDate]);
                 }
-                var separate = 'sep=,\r\n';
-                var csv = separate + 'ID,SandwichID,Name,BreadType,Price,MobilePhoneNumber,CreationDate\n';
+                let separate = 'sep=,\r\n';
+                let csv = separate + 'ID,SandwichID,Name,BreadType,Price,MobilePhoneNumber,CreationDate\n';
                 data.forEach(function(row) {
                     csv += row.join(',');
                     csv += "\n";
                 });
-                var hiddenElement = document.createElement('a');
+                let hiddenElement = document.createElement('a');
                 hiddenElement.href = 'data:text/csv;charset=utf-8,' + encodeURI(csv);
                 hiddenElement.target = '_blank';
                 hiddenElement.download = 'orders.csv';
@@ -181,14 +182,14 @@ class DenTravakOrderList extends DenTravakAbstractElement {
                             ${order.name.charAt(0)}
                         </button>
                         <div class="bmd-list-group-col">
-                            <p class="list-group-item-heading">Telefoonnummer: ${order.mobilePhoneNumber}<span class="creationDate">${dateFns.distanceInWordsToNow(order.creationDate)} ago</span></p>
-                            <p class="list-group-item-text">Bestelling: ${order.name} - ${order.breadType.toLowerCase()}</p>
+                            <p class="list-group-item-heading">${order.mobilePhoneNumber}<span class="creationDate">${dateFns.distanceInWordsToNow(order.creationDate)} ago</span></p>
+                            <p class="list-group-item-text">${order.name} - ${order.breadType.toLowerCase()}</p>
                         </div>
                         <div class="dt-order-info">
                             <p class="list-group-item-text">Prijs: €${order.price}</p>
                         </div>
                     </a>
-                    <p id="dl"></p>
+                    <p id="dlText"></p>
                 </div>
             </div>
         `;

@@ -70,18 +70,21 @@ class DenTravakOrderList extends DenTravakAbstractElement {
                         filteredData[i].name, filteredData[i].breadType,
                         filteredData[i].price, filteredData[i].mobilePhoneNumber, filteredData[i].creationDate]);
                 }
-                alert(data[0]);
-                let separate = 'sep=,\r\n';
-                let csv = separate + 'ID,SandwichID,Name,BreadType,Price,MobilePhoneNumber,CreationDate\n';
-                data.forEach(function(row) {
-                    csv += row.join(',');
-                    csv += "\n";
+
+                data.forEach(function(rowArray){
+                    let row = rowArray.join(",");
+                    csvContent += row + "\r\n";
                 });
-                let hiddenElement = document.createElement('a');
-                hiddenElement.href = 'data:text/csv;charset=utf-8,' + encodeURI(csv);
-                hiddenElement.target = '_blank';
-                hiddenElement.download = 'orders.csv';
-                hiddenElement.click();
+
+                let csvContent = "data:text/csv;charset=utf-8,";
+                let encodedUri = encodeURI(csvContent);
+                let link = document.createElement("a");
+                link.setAttribute("href", encodedUri);
+                link.setAttribute("download", "TodaysOrders.csv");
+                document.body.appendChild(link); // Required for FF
+
+                link.click();
+
             });
     }
 

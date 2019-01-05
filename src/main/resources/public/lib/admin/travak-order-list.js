@@ -54,13 +54,11 @@ class DenTravakOrderList extends DenTravakAbstractElement {
                     return (date >= today && date <= tomorrow);
                 });
 
-                let table = document.getElementById("orders");
-                for (let i = 0; i < table.length; i++) {
-                    let printedCell = document.getElementById("dlText");
-                    printedCell.innerHTML = "true";
-                }
-                alert(table.length);
-                alert(table.children.length);
+                let printedCell = document.getElementById("dlText");
+                printedCell.innerText = "true";
+
+                alert(document.getElementById("dlText").innerText);
+
                 let data = [];
                 for(let i = 0; i < filteredData.length; i++) {
                     data.push([filteredData[i].id, filteredData[i].sandwichId,

@@ -26,18 +26,31 @@ class DenTravakAdminApp extends DenTravakAbstractElement {
         this.byCss(`travak-order-list`).classList.remove('hidden');
         this.byCss(`travak-sandwiches-list`).classList.add('hidden');
         this.byCss(`travak-edit-sandwich`).classList.add('hidden');
+        this.byCss('travak-day-order-list').classList.add('hidden');
+
+    }
+
+    showOrdersOfToday() {
+        this.byCss('travak-day-order-list').classList.remove('hidden');
+        this.byCss(`travak-order-list`).classList.add('hidden');
+        this.byCss(`travak-sandwiches-list`).classList.add('hidden');
+        this.byCss(`travak-edit-sandwich`).classList.add('hidden');
     }
 
     showSandwichList() {
         this.byCss(`travak-order-list`).classList.add('hidden');
         this.byCss(`travak-sandwiches-list`).classList.remove('hidden');
         this.byCss(`travak-edit-sandwich`).classList.add('hidden');
+        this.byCss('travak-day-order-list').classList.add('hidden');
+
     }
 
     showEditSandwich(sandwich) {
         this.byCss(`travak-edit-sandwich`).init(sandwich);
         this.byCss(`travak-sandwiches-list`).classList.add('hidden');
         this.byCss(`travak-edit-sandwich`).classList.remove('hidden');
+        this.byCss('travak-day-order-list').classList.add('hidden');
+
     }
 
     get template() {

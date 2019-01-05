@@ -16,6 +16,7 @@ class DenTravakOrderList extends DenTravakAbstractElement {
 
     initEventListeners() {
         this.byId('edit-sandwiches-btn').addEventListener('click', (e) => this.app().showSandwichList());
+        this.byId('refresh-btn').addEventListener('click', (e) => this.app().showOrderList());
         this.byId('dl-today-btn').addEventListener('click', (e) => this.csvDayOrderList());
     }
 
@@ -57,7 +58,8 @@ class DenTravakOrderList extends DenTravakAbstractElement {
                 let table = this.byId("orders");
                 let dl = this.byId("dlText");
                 dl.innerHTML = "true";
-                alert(dl + "\n" + table.childElementCount);
+                alert(dl);
+                alert(table.childElementCount);
                 /*for(let i = 0; i < table.childElementCount){
 
                 }*/
@@ -116,6 +118,7 @@ class DenTravakOrderList extends DenTravakAbstractElement {
                     </ul>
                 </div>
                 <button id="dl-today-btn" type="button" class="btn btn-primary">Download bestellingen van vandaag</button>
+                <button id="refresh-btn" type="button" class="btn btn-primary">Refresh</button>
             </div>
         `;
     }

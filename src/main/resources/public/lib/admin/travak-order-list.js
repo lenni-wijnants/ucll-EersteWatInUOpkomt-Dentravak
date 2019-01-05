@@ -16,6 +16,7 @@ class DenTravakOrderList extends DenTravakAbstractElement {
 
     initEventListeners() {
         this.byId('edit-sandwiches-btn').addEventListener('click', (e) => this.app().showSandwichList());
+        this.byId('download-csv-btn').addEventListener('click', (e) => this.app().getCsv());
     }
 
     updateOrderList(orders) {
@@ -36,6 +37,41 @@ class DenTravakOrderList extends DenTravakAbstractElement {
             let orderEl = htmlToElement(this.getOrderTemplate(order));
             orderList.appendChild(orderEl);
         });
+    }
+
+    getCsv() {
+        getOrders();
+        fetch('/den-travak/orders').then(response => response.json())
+            .then(data => {
+                this.generateCsv(data);
+            })
+    }
+
+    generateCsv(data) {
+
+        let today = new Date();
+        today.setHours(0, 0, 0);
+
+        let tomorrow = new Date();
+        tomorrow.setHours(23, 59, 59);
+
+        let filteredData = data.filter(function (product) {
+            const date = new Date(product.creationDate);
+            return (date >= today && date <= tomorrow);
+        });
+
+        const table = document.getElementById("orders");
+        for (let i = 0; i < table.childNodes.length; i++) {
+            const printedCell = document.createElement("td");
+            printedCell.innerHTML = "true";
+            table.childNodes[i].appendChild(printedCell);
+        };
+        let replacer = (key, value) => value === null ? '' : value;
+        let header = Object.keys(data[0]);
+        let csv = filteredData.map(row => header.map(fieldName => JSON.stringify(row[fieldName], replacer)).join(','));
+        csv.unshift(header.join(','));
+        csv = csv.join('\r\n');
+        window.open('data:text/csv;charset=utf-8,' + escape(csv));
     }
 
     get template() {
@@ -66,6 +102,7 @@ class DenTravakOrderList extends DenTravakAbstractElement {
                 <div class="travak-header">
                     <h4>Den Travak Bestellingen</h4>
                     <button id="edit-sandwiches-btn" type="button" class="btn btn-primary">Bewerk broodjeslijst</button>
+                    <button id="download-csv-btn" type="button" class="btn btn-primary">Dowload bestellingen van vandaag</button>
                 </div>
                 <div>
                 <ul id="orders" class="list-group">
@@ -77,7 +114,7 @@ class DenTravakOrderList extends DenTravakAbstractElement {
 
     getOrderTemplate(order) {
         return `
-            <a class="list-group-item">
+            <a class="list-group-item" id="listItem">
                 <button type="button" class="btn btn-primary bmd-btn-fab">
                     ${order.name.charAt(0)}
                 </button>

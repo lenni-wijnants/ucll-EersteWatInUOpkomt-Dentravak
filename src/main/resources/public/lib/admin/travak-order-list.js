@@ -40,32 +40,6 @@ class DenTravakOrderList extends DenTravakAbstractElement {
         });
     }
 
-    /*dayOrderList() {
-        fetch('/den-travak/orders/')
-            .then(resp => resp.json())
-            .then(json => {
-                let today = new Date();
-                today.setHours(0, 0, 0);
-
-                let tomorrow = new Date();
-                tomorrow.setHours(23, 59, 59);
-
-                let filteredData = orders.filter(function (product) {
-                    const date = new Date(product.creationDate);
-                    return (date >= today && date <= tomorrow);
-                });
-
-                let orderList = this.byId('orders');
-                orderList.innerHTML = ``;
-                filteredData.forEach(order => {
-                    let orderEl = htmlToElement(this.getOrderTemplate(order));
-                    orderList.appendChild(orderEl);
-                });
-            });
-
-
-    }*/
-
    csvDayOrderList() {
         fetch('/den-travak/orders')
             .then(resp => resp.json())
@@ -82,10 +56,10 @@ class DenTravakOrderList extends DenTravakAbstractElement {
                 });
 
                 let table = document.getElementById("orders");
-                for (let i = 0; i < table.children.length; i++) {
+                /*for (let i = 0; i < table.children.length; i++) {
                     let printedCell = document.getElementById("dlText");
                     printedCell.innerHTML = "true";
-                }
+                }*/
                 alert(table.length);
                 alert(table.children.length);
                 let data = [];
@@ -149,22 +123,20 @@ class DenTravakOrderList extends DenTravakAbstractElement {
 
     getOrderTemplate(order) {
         return `
-            <li class="bestelling">
-                <div class="bestelling-body">
-                    <a class="list-group-item">
-                        <button type="button" class="btn btn-primary bmd-btn-fab">
-                            ${order.name.charAt(0)}
-                        </button>
-                        <div class="bmd-list-group-col">
-                            <p class="list-group-item-heading">${order.mobilePhoneNumber}<span class="creationDate">${dateFns.distanceInWordsToNow(order.creationDate)} ago</span></p>
-                            <p class="list-group-item-text">${order.name} - ${order.breadType.toLowerCase()}</p>
-                        </div>
-                        <div class="dt-order-info">
-                            <p class="list-group-item-text">Prijs: €${order.price}</p>
-                        </div>
-                    </a>
-                    <p id="dlText">false</p>
-                </div>
+            <li>
+                <a class="list-group-item">
+                    <button type="button" class="btn btn-primary bmd-btn-fab">
+                        ${order.name.charAt(0)}
+                    </button>
+                    <div class="bmd-list-group-col">
+                        <p class="list-group-item-heading">${order.mobilePhoneNumber}<span class="creationDate">${dateFns.distanceInWordsToNow(order.creationDate)} ago</span></p>
+                        <p class="list-group-item-text">${order.name} - ${order.breadType.toLowerCase()}</p>
+                    </div>
+                    <div class="dt-order-info">
+                        <p class="list-group-item-text">Prijs: €${order.price}</p>
+                    </div>
+                </a>
+                <p id="dlText">false</p>
             </li>
         `;
     }

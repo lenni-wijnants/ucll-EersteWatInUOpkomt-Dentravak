@@ -83,9 +83,8 @@ class DenTravakOrderList extends DenTravakAbstractElement {
 
                 const table = document.getElementById("orders");
                 for (let i = 0; i < table.length; i++) {
-                    const printedCell = document.createElement("p");
+                    const printedCell = document.getElementById("dl");
                     printedCell.innerHTML = "true";
-                    table[i].appendChild(printedCell);
                 };
 
                 var data = []
@@ -147,6 +146,7 @@ class DenTravakOrderList extends DenTravakAbstractElement {
         `;
     }
 
+
     /*<div class="animate">
         <div class="travak-header">
             <h4>Den Travak Bestellingen</h4>
@@ -158,7 +158,6 @@ class DenTravakOrderList extends DenTravakAbstractElement {
         </ul>
         </div>
     </div>*/
-
     getOrderTemplate(order) {
         /*return `
             <a class="list-group-item" id="listItem">
@@ -175,20 +174,21 @@ class DenTravakOrderList extends DenTravakAbstractElement {
             </a>
         `;*/
         return `
-            <div class="card">
-                <div class="card-body">
+            <div class="bestelling">
+                <div class="bestelling-body">
                     <a class="list-group-item">
                         <button type="button" class="btn btn-primary bmd-btn-fab">
                             ${order.name.charAt(0)}
                         </button>
                         <div class="bmd-list-group-col">
-                            <p class="list-group-item-heading">Telefoon nummer: ${order.mobilePhoneNumber}<span class="creationDate">${dateFns.distanceInWordsToNow(order.creationDate)} ago</span></p>
+                            <p class="list-group-item-heading">Telefoonnummer: ${order.mobilePhoneNumber}<span class="creationDate">${dateFns.distanceInWordsToNow(order.creationDate)} ago</span></p>
                             <p class="list-group-item-text">Bestelling: ${order.name} - ${order.breadType.toLowerCase()}</p>
                         </div>
                         <div class="dt-order-info">
                             <p class="list-group-item-text">Prijs: €${order.price}</p>
                         </div>
                     </a>
+                    <p id="dl"></p>
                 </div>
             </div>
         `;

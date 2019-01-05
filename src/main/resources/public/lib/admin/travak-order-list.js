@@ -56,13 +56,11 @@ class DenTravakOrderList extends DenTravakAbstractElement {
                 });
 
                 let table = this.byId("orders");
-                let dl = this.byId("dlText");
-                dl.innerHTML = "true";
-                alert(dl);
-                alert(table.childElementCount);
-                /*for(let i = 0; i < table.childElementCount){
 
-                }*/
+                for(let i = 0; i < table.childElementCount; i++){
+                    let dl = this.byId("dlText");
+                    dl.innerHTML = "true";
+                }
 
                 let data = [];
                 for(let i = 0; i < filteredData.length; i++) {

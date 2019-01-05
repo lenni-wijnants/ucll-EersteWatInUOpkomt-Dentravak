@@ -141,4 +141,4 @@ class DenTravakDayOrderList extends DenTravakAbstractElement {
     }
 }
 
-customElements.define('travak-day-order-list', DenTravakDayOrderList);
+customElements.define('travak-dayOrders-list', DenTravakDayOrderList);

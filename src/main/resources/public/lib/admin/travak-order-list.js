@@ -16,7 +16,6 @@ class DenTravakOrderList extends DenTravakAbstractElement {
 
     initEventListeners() {
         this.byId('edit-sandwiches-btn').addEventListener('click', (e) => this.app().showSandwichList());
-        //this.byId('orders-today-btn').addEventListener('click', (e) => this.dayOrderList());
         this.byId('dl-today-btn').addEventListener('click', (e) => this.csvDayOrderList());
     }
 
@@ -123,21 +122,19 @@ class DenTravakOrderList extends DenTravakAbstractElement {
 
     getOrderTemplate(order) {
         return `
-            <li>
-                <a class="list-group-item">
-                    <button type="button" class="btn btn-primary bmd-btn-fab">
-                        ${order.name.charAt(0)}
-                    </button>
-                    <div class="bmd-list-group-col">
-                        <p class="list-group-item-heading">${order.mobilePhoneNumber}<span class="creationDate">${dateFns.distanceInWordsToNow(order.creationDate)} ago</span></p>
-                        <p class="list-group-item-text">${order.name} - ${order.breadType.toLowerCase()}</p>
-                    </div>
-                    <div class="dt-order-info">
-                        <p class="list-group-item-text">Prijs: €${order.price}</p>
-                    </div>
-                </a>
+            <a class="list-group-item">
+                <button type="button" class="btn btn-primary bmd-btn-fab">
+                    ${order.name.charAt(0)}
+                </button>
+                <div class="bmd-list-group-col">
+                    <p class="list-group-item-heading">${order.mobilePhoneNumber}<span class="creationDate">${dateFns.distanceInWordsToNow(order.creationDate)} ago</span></p>
+                    <p class="list-group-item-text">${order.name} - ${order.breadType.toLowerCase()}</p>
+                </div>
+                <div class="dt-order-info">
+                    <p class="list-group-item-text">Prijs: €${order.price}</p>
+                </div>
                 <p id="dlText">false</p>
-            </li>
+            </a>
         `;
     }
 }
